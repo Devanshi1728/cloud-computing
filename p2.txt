@@ -1,0 +1,31 @@
+1.create table emp(empno number(5),nm varchar(10),salary number(5),deptno number(5),designation varchar(10));
+desc emp;
+create trigger t2
+after insert on emp2
+begin
+dbms_output.put_line('Employee Added');
+end;
+insert into emp2 values(1,'Devu',3500,111,'manager');
+
+2.create or replace trigger t3
+before update on emp2
+for each row when(new.salary>2000)
+begin 
+dbms_output.put_line('new salary' || :NEW.salary);
+end;
+
+update emp2 set salary=39000;
+
+3.
+create or replace trigger t4
+before delete on emp2
+begin 
+delete from dept2;
+end;
+
+
+create table dept2(deptno number(5),name varchar(8),no_of_emp number(5),tot_sal number(5));
+insert into dept2 values(111,'mca',1,40000);
+delete from emp2 where empno=1;
+select * from dept2;
+
