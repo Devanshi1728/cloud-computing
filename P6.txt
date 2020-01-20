@@ -1,0 +1,41 @@
+1.
+	package speification: 
+create OR REPLACE package emp_data1 as
+function get_empinfo(empid in varchar)
+return varchar;
+function get_totalsal(empid in varchar)
+return number;
+end emp_data1;
+
+	package body:
+CREATE or replace package body emp_data1 as
+ function get_empinfo(empid varchar) 
+ return varchar is empnm varchar(20);
+begin
+ select name into empnm from emp where emp_no = empid;
+dbms_output.put_line('Name :' || empnm);
+ return empnm;
+end get_empinfo;
+
+function get_totalsal(empid varchar)
+return number is empsal number;
+begin
+select salary into empsal from emp where emp_no=empid;
+dbms_output.put_line('Salary :' || empsal);
+return empsal;
+end get_totalsal;
+end emp_data1;
+/
+	Execution:
+begin
+dbms_output.put_line(emp_data1.get_totalsal('H0004'));
+end;
+/
+
+2.
+create OR REPLACE package emp_mgmt as
+procedure emp_insert(empid varchar,name varchar,salary number,dept_no number,design varchar,dept_name varchar,city varchar);
+procedure emp_update(empid varchar);
+procedure emp_fetch(empid varchar);
+end emp_mgmt;
+/
